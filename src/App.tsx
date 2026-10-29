@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CourseSpecification, UserRole, ThemeMode } from './types';
-import { fetchCourseSpecification, saveCourseSpecification } from './api';
+import { fetchCourseSpecification, saveCourseSpecification, clearAllCourseData } from './api';
 import { StitchDashboard } from './screens/StitchDashboard';
 import { AnnexureDrawer } from './components/AnnexureDrawer';
 import { Settings } from './Settings';
@@ -208,9 +208,11 @@ export default function App() {
               }`}
             >
               <span className="material-symbols-outlined text-purple-400 text-base">domain</span>
-              <span className="font-semibold">{spec.department}</span>
+              <span className="font-semibold">{spec.department || 'Curriculum Governance Studio'}</span>
               <span className="text-purple-400 font-mono">•</span>
-              <span className="font-mono text-[#00ff66] font-bold">AY {spec.academicYear}</span>
+              <span className="font-mono text-[#00ff66] font-bold">
+                {spec.academicYear ? `AY ${spec.academicYear}` : 'Continuous Accreditation'}
+              </span>
             </div>
           </div>
 
@@ -256,6 +258,25 @@ export default function App() {
                 ✍️ Author
               </button>
             </div>
+
+            {/* Clear / Reset Spec Data Button */}
+            <button
+              type="button"
+              onClick={() => {
+                soundEffects.click();
+                const clean = clearAllCourseData();
+                setSpec(clean);
+              }}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-mono transition-all cursor-pointer ${
+                isCyber
+                  ? 'bg-[#0d0917] hover:bg-[#18112b] text-purple-300 hover:text-white border-purple-800/40 shadow-sm'
+                  : 'bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border-slate-300'
+              }`}
+              title="Clear all course data"
+            >
+              <span className="material-symbols-outlined text-sm text-purple-400">restart_alt</span>
+              <span className="hidden sm:inline">Reset Spec</span>
+            </button>
 
             {/* Audio SFX Toggle Button */}
             <button
@@ -343,14 +364,18 @@ export default function App() {
             {/* Profile Avatar */}
             <div className="flex items-center gap-2 pl-2 border-l border-purple-900/50">
               <div className="w-8 h-8 rounded-md bg-purple-700 text-white flex items-center justify-center font-bold text-xs ring-2 ring-purple-500/50 shadow-md">
-                KA
+                {role === 'hod' ? 'HD' : role === 'reviewer' ? 'PR' : 'CA'}
               </div>
               <div className="hidden 2xl:flex flex-col text-left">
                 <span className="text-xs leading-none text-white font-semibold">
-                  {role === 'hod' ? 'Dr. K. Arisawa' : role === 'reviewer' ? 'Prof. M. Vance' : 'Dr. A. Sharma'}
+                  {role === 'hod'
+                    ? (spec.faculty.name ? `HOD (${spec.faculty.name})` : 'Head of Department')
+                    : role === 'reviewer'
+                    ? 'Academic Peer Reviewer'
+                    : (spec.faculty.name || 'Course Author')}
                 </span>
                 <span className="font-mono text-[10px] leading-tight text-purple-300/80">
-                  {role === 'hod' ? 'Dean of Curriculum' : role === 'reviewer' ? 'Review Board Member' : 'Course Author'}
+                  {role === 'hod' ? 'Dean / BoS Chair' : role === 'reviewer' ? 'Review Board Member' : 'Faculty Author'}
                 </span>
               </div>
             </div>

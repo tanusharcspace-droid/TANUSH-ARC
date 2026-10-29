@@ -1,0 +1,147 @@
+{
+  "input_id": "SAMPLE",
+  "courseCode": "CS301",
+  "code": "CS301",
+  "courseTitle": "Data Structures & Algorithms",
+  "title": "Data Structures & Algorithms",
+  "institution": "Autonomous Institute of Technology & Engineering",
+  "regulation": "2024 Autonomy",
+  "academicYear": "2025-2026",
+  "status": "approved",
+  "credits": {
+    "lecture": 3,
+    "tutorial": 0,
+    "practical": 2,
+    "total": 4,
+    "contactHours": 60
+  },
+  "courseObjectives": [
+    "To introduce foundational concepts of abstract data types and algorithmic complexity.",
+    "To analyze linear and non-linear data structures including trees, balanced search structures, and graphs.",
+    "To design and evaluate efficient sorting, searching, and hashing strategies for computational tasks."
+  ],
+  "clos": [
+    {
+      "code": "CO1",
+      "statement": "Analyze the asymptotic time and space complexity of iterative and recursive algorithms using Big-O, Big-Omega, and Big-Theta notations.",
+      "bloomsLevel": "L4",
+      "poMappings": {
+        "PO1": 3,
+        "PO2": 3,
+        "PO3": 2,
+        "PO4": 2,
+        "PO12": 1
+      },
+      "psoMappings": {
+        "PSO1": 3,
+        "PSO2": 2
+      }
+    },
+    {
+      "code": "CO2",
+      "statement": "Construct and implement singly linked, doubly linked, circular linked lists, stacks, and circular queues for dynamic memory management.",
+      "bloomsLevel": "L3",
+      "poMappings": {
+        "PO1": 3,
+        "PO2": 2,
+        "PO3": 3,
+        "PO5": 2
+      },
+      "psoMappings": {
+        "PSO1": 3,
+        "PSO2": 3
+      }
+    },
+    {
+      "code": "CO3",
+      "statement": "Evaluate binary trees, binary search trees (BST), and AVL tree self-balancing rotations during dynamic data updates.",
+      "bloomsLevel": "L5",
+      "poMappings": {
+        "PO1": 3,
+        "PO2": 3,
+        "PO3": 3,
+        "PO4": 2
+      },
+      "psoMappings": {
+        "PSO1": 3,
+        "PSO2": 2
+      }
+    },
+    {
+      "code": "CO4",
+      "statement": "Design graph models and compute shortest paths, topological sort orders, and minimum spanning trees using BFS, DFS, Dijkstra, and Kruskal algorithms.",
+      "bloomsLevel": "L4",
+      "poMappings": {
+        "PO1": 3,
+        "PO2": 3,
+        "PO3": 3,
+        "PO5": 2
+      },
+      "psoMappings": {
+        "PSO1": 3,
+        "PSO2": 3
+      }
+    },
+    {
+      "code": "CO5",
+      "statement": "Implement collision resolution strategies in hash tables including separate chaining and open addressing with linear and quadratic probing.",
+      "bloomsLevel": "L3",
+      "poMappings": {
+        "PO1": 3,
+        "PO2": 2,
+        "PO3": 2,
+        "PO4": 2
+      },
+      "psoMappings": {
+        "PSO1": 3,
+        "PSO2": 2
+      }
+    }
+  ],
+  "units": [
+    {
+      "unitRoman": "UNIT I",
+      "title": "Linear Data Structures & Algorithm Complexity",
+      "lectureHours": 12,
+      "bloomsTier": "L4",
+      "content": "Asymptotic notation, amortized analysis, Singly & Doubly Linked Lists, Array-based stacks and queues."
+    },
+    {
+      "unitRoman": "UNIT II",
+      "title": "Tree Hierarchies & Balanced Search Structures",
+      "lectureHours": 12,
+      "bloomsTier": "L5",
+      "content": "Binary Trees, BST operations, AVL Trees, balancing rotations, B-Trees & Red-Black tree principles."
+    },
+    {
+      "unitRoman": "UNIT III",
+      "title": "Graph Theory & Network Traversal",
+      "lectureHours": 12,
+      "bloomsTier": "L4",
+      "content": "Graph representations, BFS, DFS, topological sorting, Dijkstra shortest path, Kruskal and Prim MST."
+    },
+    {
+      "unitRoman": "UNIT IV",
+      "title": "Hashing & Priority Queues",
+      "lectureHours": 12,
+      "bloomsTier": "L3",
+      "content": "Hash functions, collision resolution, binary heaps, priority queue operations, heap sort."
+    },
+    {
+      "unitRoman": "UNIT V",
+      "title": "Sorting Paradigms & Advanced Applications",
+      "lectureHours": 12,
+      "bloomsTier": "L4",
+      "content": "Divide and conquer, QuickSort, MergeSort, RadixSort, Disjoint-Set Data Structures (Union-Find)."
+    }
+  ],
+  "governanceQuorum": {
+    "hodSigned": true,
+    "verificationTimestamp": "2026-10-29 11:14:04 UTC",
+    "digitalSignature": "ED25519-SIG-RATIFIED-9B4F81DA",
+    "checksum": "0x9b4fa267"
+  },
+  "verifiedBy": "SpecForge AI Synthesis Engine",
+  "credit": "CREATED BY TANUSH M D",
+  "timestamp": "2026-10-29T11:14:04.279Z"
+}

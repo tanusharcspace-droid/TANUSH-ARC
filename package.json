@@ -11,7 +11,7 @@
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "check": "tsc --noEmit",
-    "verify": "tsc --noEmit"
+    "verify": "node scripts/verify.cjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

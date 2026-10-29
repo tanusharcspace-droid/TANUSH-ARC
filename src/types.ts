@@ -89,6 +89,7 @@ export interface AIDiffEntry {
 }
 
 export interface CourseSpecification {
+  input_id?: string;
   id: string;
   code: string;
   title: string;

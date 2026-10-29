@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS301 - Accredited Course Specification Dossier</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 40px 16px; background: #f8fafc; color: #0f172a; line-height: 1.5; }
+    .container { max-width: 960px; margin: 0 auto; background: #ffffff; padding: 48px; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; }
+    .header-banner { text-align: center; border-bottom: 2px solid #0f172a; padding-bottom: 24px; margin-bottom: 28px; }
+    .inst-title { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
+    .inst-sub { font-size: 13px; color: #475569; margin-top: 6px; text-transform: uppercase; }
+    .doc-type { font-size: 13px; font-family: monospace; font-weight: 700; color: #4338ca; margin-top: 8px; }
+    .grid-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 20px; background: #f1f5f9; padding: 20px; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 28px; font-size: 12px; }
+    .meta-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
+    .meta-label { color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 11px; }
+    .meta-val { font-weight: 700; color: #0f172a; font-family: monospace; }
+    .section-title { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; border-left: 4px solid #4f46e5; padding-left: 12px; margin: 32px 0 14px 0; color: #1e1b4b; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+    th { background: #0f172a; color: #ffffff; padding: 10px 12px; border: 1px solid #0f172a; font-size: 11px; text-transform: uppercase; }
+    .footer { margin-top: 40px; padding-top: 24px; border-top: 2px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #64748b; font-family: monospace; flex-wrap: wrap; gap: 12px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-banner">
+      <div class="inst-title">Autonomous Institute of Technology & Engineering</div>
+      <div class="inst-sub">Department of Computer Science & Engineering • B.Tech Curriculum</div>
+      <div class="doc-type">OFFICIAL ACCREDITED COURSE SPECIFICATION (spec.html)</div>
+    </div>
+
+    <div class="grid-meta">
+      <div class="meta-item"><span class="meta-label">Course Code:</span><span class="meta-val">CS301</span></div>
+      <div class="meta-item"><span class="meta-label">Regulation / Batch:</span><span class="meta-val">2024 Autonomy (2025-2026)</span></div>
+      <div class="meta-item"><span class="meta-label">Course Title:</span><span class="meta-val">Data Structures & Algorithms</span></div>
+      <div class="meta-item"><span class="meta-label">Status:</span><span class="badge">APPROVED & RATIFIED</span></div>
+      <div class="meta-item"><span class="meta-label">Credits (L:T:P):</span><span class="meta-val">3:0:2 (Total: 4)</span></div>
+      <div class="meta-item"><span class="meta-label">Contact Hours:</span><span class="meta-val">60 Hours</span></div>
+    </div>
+
+    <div class="section-title">1. Course Objectives</div>
+    <ol style="font-size: 13px; color: #334155; line-height: 1.7; margin-left: 20px;">
+      <li>To introduce foundational concepts of abstract data types and algorithmic complexity.</li><li>To analyze linear and non-linear data structures including trees, balanced search structures, and graphs.</li><li>To design and evaluate efficient sorting, searching, and hashing strategies for computational tasks.</li>
+    </ol>
+
+    <div class="section-title">2. Course Learning Outcomes (CLOs) & Bloom Taxonomy</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 12%;">CLO Code</th>
+          <th style="width: 70%;">Outcome Statement</th>
+          <th style="width: 18%;">Bloom Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+  <tr>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO1</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1;">Analyze the asymptotic time and space complexity of iterative and recursive algorithms using Big-O, Big-Omega, and Big-Theta notations.</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; color: #4338ca;">L4</td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO2</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1;">Construct and implement singly linked, doubly linked, circular linked lists, stacks, and circular queues for dynamic memory management.</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; color: #4338ca;">L3</td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO3</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1;">Evaluate binary trees, binary search trees (BST), and AVL tree self-balancing rotations during dynamic data updates.</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; color: #4338ca;">L5</td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO4</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1;">Design graph models and compute shortest paths, topological sort orders, and minimum spanning trees using BFS, DFS, Dijkstra, and Kruskal algorithms.</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; color: #4338ca;">L4</td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO5</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1;">Implement collision resolution strategies in hash tables including separate chaining and open addressing with linear and quadratic probing.</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; color: #4338ca;">L3</td>
+  </tr>
+
+      </tbody>
+    </table>
+
+    <div class="section-title">3. Program Outcome (PO) & PSO Correlation Matrix</div>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 10%;">CLO</th>
+            <th style="width: 5%;">PO1</th><th style="width: 5%;">PO2</th><th style="width: 5%;">PO3</th><th style="width: 5%;">PO4</th><th style="width: 5%;">PO5</th><th style="width: 5%;">PO6</th><th style="width: 5%;">PO7</th><th style="width: 5%;">PO8</th><th style="width: 5%;">PO9</th><th style="width: 5%;">PO10</th><th style="width: 5%;">PO11</th><th style="width: 5%;">PO12</th>
+            <th style="width: 6%; background: #334155;">PSO1</th><th style="width: 6%; background: #334155;">PSO2</th><th style="width: 6%; background: #334155;">PSO3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding: 8px 10px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO1</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">1</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td></tr><tr><td style="padding: 8px 10px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td></tr><tr><td style="padding: 8px 10px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td></tr><tr><td style="padding: 8px 10px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO4</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td></tr><tr><td style="padding: 8px 10px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">CO5</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #eef2ff;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">3</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; background: #ecfdf5;">2</td><td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: normal; background: transparent;">-</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-title">4. Syllabus Units & Lecture Breakdown</div>
+    <div>
+      
+        <div style="margin-bottom: 16px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong style="font-size: 14px; color: #0f172a;">UNIT I: Linear Data Structures & Algorithm Complexity</strong>
+            <span style="font-size: 11px; font-family: monospace; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">
+              12 Hours • Tier: L4
+            </span>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.6;">Asymptotic notation, amortized analysis, Singly & Doubly Linked Lists, Array-based stacks and queues.</p>
+        </div>
+      
+        <div style="margin-bottom: 16px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong style="font-size: 14px; color: #0f172a;">UNIT II: Tree Hierarchies & Balanced Search Structures</strong>
+            <span style="font-size: 11px; font-family: monospace; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">
+              12 Hours • Tier: L5
+            </span>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.6;">Binary Trees, BST operations, AVL Trees, balancing rotations, B-Trees & Red-Black tree principles.</p>
+        </div>
+      
+        <div style="margin-bottom: 16px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong style="font-size: 14px; color: #0f172a;">UNIT III: Graph Theory & Network Traversal</strong>
+            <span style="font-size: 11px; font-family: monospace; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">
+              12 Hours • Tier: L4
+            </span>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.6;">Graph representations, BFS, DFS, topological sorting, Dijkstra shortest path, Kruskal and Prim MST.</p>
+        </div>
+      
+        <div style="margin-bottom: 16px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong style="font-size: 14px; color: #0f172a;">UNIT IV: Hashing & Priority Queues</strong>
+            <span style="font-size: 11px; font-family: monospace; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">
+              12 Hours • Tier: L3
+            </span>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.6;">Hash functions, collision resolution, binary heaps, priority queue operations, heap sort.</p>
+        </div>
+      
+        <div style="margin-bottom: 16px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong style="font-size: 14px; color: #0f172a;">UNIT V: Sorting Paradigms & Advanced Applications</strong>
+            <span style="font-size: 11px; font-family: monospace; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">
+              12 Hours • Tier: L4
+            </span>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.6;">Divide and conquer, QuickSort, MergeSort, RadixSort, Disjoint-Set Data Structures (Union-Find).</p>
+        </div>
+      
+    </div>
+
+    <div class="footer">
+      <div>AUTHENTICATION SEAL: ED25519-SIG-RATIFIED-9B4F81DA</div>
+      <div>CREATED BY TANUSH M D</div>
+    </div>
+  </div>
+</body>
+</html>

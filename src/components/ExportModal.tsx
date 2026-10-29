@@ -19,10 +19,14 @@ export const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose, spec,
   };
 
   const handleDownloadJSON = () => {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(spec, null, 2));
+    const exportPayload = {
+      input_id: spec.input_id || "SAMPLE",
+      ...spec
+    };
+    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportPayload, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute('href', dataStr);
-    downloadAnchor.setAttribute('download', `${spec.code}_Course_Specification.json`);
+    downloadAnchor.setAttribute('download', 'specforge_output.json');
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
@@ -100,25 +104,25 @@ export const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose, spec,
             <div>
               <span className="font-bold text-slate-600 block">Course Code & Title:</span>
               <span className="font-semibold text-slate-900 text-xs">
-                {spec.code}: {spec.title}
+                {spec.code || 'SPEC'}: {spec.title || 'Course Specification'}
               </span>
             </div>
             <div>
               <span className="font-bold text-slate-600 block">Credits & Contact Hours:</span>
               <span>
-                {spec.credits.lecture}L + {spec.credits.tutorial}T + {spec.credits.practical}P = {spec.credits.total} Credits
+                {spec.credits.lecture}L + {spec.credits.tutorial}T + {spec.credits.practical}P = {spec.credits.total} Credits ({spec.credits.contactHours} Hours)
               </span>
             </div>
             <div>
               <span className="font-bold text-slate-600 block">Lead Course Instructor:</span>
               <span>
-                {spec.faculty.name} ({spec.faculty.designation})
+                {spec.faculty.name || 'Unassigned Faculty'} {spec.faculty.designation ? `(${spec.faculty.designation})` : ''}
               </span>
             </div>
             <div>
               <span className="font-bold text-slate-600 block">Statutory Quorum Status:</span>
               <span className="font-semibold text-emerald-800">
-                {spec.status.toUpperCase()} (DCC & BoS Ratified)
+                {spec.status.toUpperCase()} ({spec.governanceQuorum.hodSigned ? 'HOD & BoS Ratified' : 'Draft Protocol'})
               </span>
             </div>
           </div>
@@ -128,7 +132,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose, spec,
             <h3 className="font-sans font-bold uppercase tracking-wider text-xs border-b pb-1 mb-2 text-slate-800">
               1. Course Overview & Scope
             </h3>
-            <p className="text-slate-700">{spec.courseOverview}</p>
+            <p className="text-slate-700">{spec.courseOverview || 'Course scope and catalog descriptions will be rendered upon syllabus ingestion.'}</p>
           </div>
 
           {/* CLO Statements */}
@@ -145,18 +149,26 @@ export const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose, spec,
                 </tr>
               </thead>
               <tbody>
-                {spec.clos.map((clo) => {
-                  const bloom = getBloomsByCode(clo.bloomsLevel);
-                  return (
-                    <tr key={clo.id}>
-                      <td className="border border-slate-300 p-2 font-mono font-bold">{clo.code}</td>
-                      <td className="border border-slate-300 p-2">{clo.statement}</td>
-                      <td className="border border-slate-300 p-2 text-center font-mono">
-                        {clo.bloomsLevel} ({bloom?.name})
-                      </td>
-                    </tr>
-                  );
-                })}
+                {spec.clos.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} className="border border-slate-300 p-4 text-center text-slate-500">
+                      No Course Learning Outcomes defined.
+                    </td>
+                  </tr>
+                ) : (
+                  spec.clos.map((clo) => {
+                    const bloom = getBloomsByCode(clo.bloomsLevel);
+                    return (
+                      <tr key={clo.id}>
+                        <td className="border border-slate-300 p-2 font-mono font-bold">{clo.code}</td>
+                        <td className="border border-slate-300 p-2">{clo.statement}</td>
+                        <td className="border border-slate-300 p-2 text-center font-mono">
+                          {clo.bloomsLevel} ({bloom?.name})
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
               </tbody>
             </table>
           </div>
@@ -167,29 +179,35 @@ export const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose, spec,
               3. Modular Syllabus Distribution
             </h3>
             <div className="space-y-3 font-sans">
-              {(spec.modules || spec.units || []).map((m: any, idx: number) => (
-                <div key={m.id || idx} className="border p-2.5">
-                  <div className="flex justify-between font-bold mb-1">
-                    <span>
-                      Module {m.moduleNumber || idx + 1}: {m.title}
-                    </span>
-                    <span className="font-mono text-slate-500">{m.lectureHours} Hours</span>
-                  </div>
-                  <p className="text-slate-600 text-[11px]">{Array.isArray(m.topics) ? m.topics.join(' • ') : m.content}</p>
+              {(spec.modules || spec.units || []).length === 0 ? (
+                <div className="p-3 border text-slate-500 text-center">
+                  No syllabus units or modules scheduled.
                 </div>
-              ))}
+              ) : (
+                (spec.modules || spec.units || []).map((m: any, idx: number) => (
+                  <div key={m.id || idx} className="border p-2.5">
+                    <div className="flex justify-between font-bold mb-1">
+                      <span>
+                        Module {m.moduleNumber || idx + 1}: {m.title}
+                      </span>
+                      <span className="font-mono text-slate-500">{m.lectureHours} Hours</span>
+                    </div>
+                    <p className="text-slate-600 text-[11px]">{Array.isArray(m.topics) ? m.topics.join(' • ') : m.content}</p>
+                  </div>
+                ))
+              )}
             </div>
           </div>
 
           {/* Ratification Sign-off strip */}
           <div className="pt-6 border-t font-sans grid grid-cols-3 gap-4 text-center">
             <div className="border-t border-slate-400 pt-2">
-              <div className="font-semibold text-xs">{spec.faculty.name}</div>
+              <div className="font-semibold text-xs">{spec.faculty.name || 'Course Instructor'}</div>
               <div className="text-[10px] text-slate-500">Course Instructor Signature</div>
             </div>
             <div className="border-t border-slate-400 pt-2">
-              <div className="font-semibold text-xs">Prof. Sarah Jenkins</div>
-              <div className="text-[10px] text-slate-500">DCC Chairperson Signature</div>
+              <div className="font-semibold text-xs">DCC Chairperson</div>
+              <div className="text-[10px] text-slate-500">Department Curriculum Committee</div>
             </div>
             <div className="border-t border-slate-400 pt-2">
               <div className="font-semibold text-xs">Dean of Academic Affairs</div>
