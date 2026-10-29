@@ -1,0 +1,8 @@
+{
+  "name": "SpecForge Course Specification Governance Dashboard",
+  "description": "High-assurance course specification processing, outcome mapping matrices, Bloom's taxonomy alignment, and institutional governance approval workflow.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

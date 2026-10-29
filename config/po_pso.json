@@ -1,0 +1,142 @@
+{
+  "annexure": "Annexure A - Statutory Curriculum Outcomes & Taxonomy Standard",
+  "version": "2026.1-Accreditation-Standard",
+  "programOutcomes": [
+    {
+      "code": "PO1",
+      "title": "Engineering Knowledge",
+      "statement": "Apply knowledge of mathematics, natural sciences, computing, and engineering fundamentals to the solution of complex computer engineering problems.",
+      "category": "Core Knowledge"
+    },
+    {
+      "code": "PO2",
+      "title": "Problem Analysis",
+      "statement": "Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics and engineering sciences.",
+      "category": "Analysis"
+    },
+    {
+      "code": "PO3",
+      "title": "Design & Development of Solutions",
+      "statement": "Design solutions for complex engineering problems and design system components or processes that meet specified needs with consideration for public health, safety, societal, and environmental factors.",
+      "category": "Design"
+    },
+    {
+      "code": "PO4",
+      "title": "Conduct Investigations of Complex Problems",
+      "statement": "Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of information to provide valid conclusions.",
+      "category": "Investigation"
+    },
+    {
+      "code": "PO5",
+      "title": "Modern Tool Usage",
+      "statement": "Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of limitations.",
+      "category": "Tooling"
+    },
+    {
+      "code": "PO6",
+      "title": "The Engineer and Society",
+      "statement": "Apply reasoning informed by contextual knowledge to assess societal, health, safety, legal, and cultural issues and the consequent responsibilities relevant to professional engineering practice.",
+      "category": "Societal Context"
+    },
+    {
+      "code": "PO7",
+      "title": "Environment and Sustainability",
+      "statement": "Understand the impact of professional engineering solutions in societal and environmental contexts, and demonstrate knowledge of, and need for sustainable development.",
+      "category": "Sustainability"
+    },
+    {
+      "code": "PO8",
+      "title": "Ethics",
+      "statement": "Apply ethical principles and commit to professional ethics and responsibilities and norms of engineering practice.",
+      "category": "Ethics"
+    },
+    {
+      "code": "PO9",
+      "title": "Individual and Team Work",
+      "statement": "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.",
+      "category": "Teamwork"
+    },
+    {
+      "code": "PO10",
+      "title": "Communication",
+      "statement": "Communicate effectively on complex engineering activities with the engineering community and with society at large, including comprehending and writing effective reports and documentation.",
+      "category": "Communication"
+    },
+    {
+      "code": "PO11",
+      "title": "Project Management and Finance",
+      "statement": "Demonstrate knowledge and understanding of engineering and management principles and apply these to manage projects in multidisciplinary environments.",
+      "category": "Management"
+    },
+    {
+      "code": "PO12",
+      "title": "Life-long Learning",
+      "statement": "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.",
+      "category": "Continuous Learning"
+    }
+  ],
+  "programSpecificOutcomes": [
+    {
+      "code": "PSO1",
+      "title": "System Architecture & Software Engineering",
+      "statement": "Architect, construct, and verify secure, resilient software applications and distributed systems conforming to industry architectural standards.",
+      "category": "Architecture"
+    },
+    {
+      "code": "PSO2",
+      "title": "Algorithmic Precision & Cyber-Infrastructure",
+      "statement": "Deploy algorithmic optimizations, cryptographic mechanisms, and cyber-infrastructure protocols to solve compute-intensive and safety-critical problems.",
+      "category": "Infrastructure"
+    },
+    {
+      "code": "PSO3",
+      "title": "Autonomous Systems & Data Intelligence",
+      "statement": "Synthesize data-driven machine learning models, intelligent interfaces, and automated verification pipelines to deliver measurable operational impact.",
+      "category": "AI & Intelligence"
+    }
+  ],
+  "bloomsLevels": [
+    {
+      "code": "L1",
+      "name": "Remember",
+      "description": "Retrieve relevant knowledge from long-term memory. Recognizing and recalling relevant facts, terms, and concepts.",
+      "actionVerbs": ["Define", "List", "Recall", "State", "Identify", "Name"],
+      "color": "slate"
+    },
+    {
+      "code": "L2",
+      "name": "Understand",
+      "description": "Construct meaning from instructional messages, including oral, written, and graphic communication. Interpreting, exemplifying, classifying.",
+      "actionVerbs": ["Describe", "Explain", "Summarize", "Illustrate", "Classify", "Paraphrase"],
+      "color": "blue"
+    },
+    {
+      "code": "L3",
+      "name": "Apply",
+      "description": "Carry out or use a procedure in a given situation. Executing or implementing computational algorithms and design patterns.",
+      "actionVerbs": ["Execute", "Implement", "Solve", "Calculate", "Construct", "Utilize"],
+      "color": "emerald"
+    },
+    {
+      "code": "L4",
+      "name": "Analyze",
+      "description": "Break material into constituent parts, determining how parts relate to one another and to an overall structure or purpose.",
+      "actionVerbs": ["Differentiate", "Deconstruct", "Investigate", "Compare", "Audit", "Debug"],
+      "color": "amber"
+    },
+    {
+      "code": "L5",
+      "name": "Evaluate",
+      "description": "Make judgments based on criteria and standards. Checking, verifying, critiquing algorithmic performance and security compliance.",
+      "actionVerbs": ["Appraise", "Critique", "Assess", "Verify", "Validate", "Benchmark"],
+      "color": "orange"
+    },
+    {
+      "code": "L6",
+      "name": "Create",
+      "description": "Put elements together to form a coherent or functional whole; reorganize elements into a new pattern or structure.",
+      "actionVerbs": ["Design", "Formulate", "Architect", "Synthesize", "Generate", "Devise"],
+      "color": "purple"
+    }
+  ]
+}
