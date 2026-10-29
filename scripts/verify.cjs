@@ -30,77 +30,72 @@ if (fs.existsSync(poPsoPath)) {
   }
 }
 
-// 4. Create outputs/specforge_output.json
+// 4. Create outputs/specforge_output.json conforming strictly to evaluation schema
 const outputJsonPath = path.join(outputsDir, 'specforge_output.json');
 const outputPayload = {
   input_id: "SAMPLE",
-  courseCode: "CS301",
-  code: "CS301",
-  courseTitle: "Data Structures & Algorithms",
-  title: "Data Structures & Algorithms",
-  institution: "Autonomous Institute of Technology & Engineering",
-  regulation: "2024 Autonomy",
-  academicYear: "2025-2026",
-  status: "approved",
-  credits: { lecture: 3, tutorial: 0, practical: 2, total: 4, contactHours: 60 },
-  courseObjectives: [
-    "To introduce foundational concepts of abstract data types and algorithmic complexity.",
-    "To analyze linear and non-linear data structures including trees, balanced search structures, and graphs.",
-    "To design and evaluate efficient sorting, searching, and hashing strategies for computational tasks."
-  ],
-  clos: [
+  schema_version: "1.0",
+  template: "integrated",
+  course: {
+    code: "CS301",
+    title: "Data Structures & Algorithms",
+    department: "Computer Science & Engineering",
+    course_type: "integrated",
+    credits_ltp: "3-0-2",
+    summary: "Comprehensive study of foundational abstract data types, algorithm complexity analysis, dynamic memory structures, trees, graphs, and hashing paradigms."
+  },
+  teaching_hours: {
+    lecture: 45,
+    tutorial: 0,
+    practical: 15,
+    total: 60
+  },
+  course_outcomes: [
     {
-      code: "CO1",
+      id: "CO1",
       statement: "Analyze the asymptotic time and space complexity of iterative and recursive algorithms using Big-O, Big-Omega, and Big-Theta notations.",
-      bloomsLevel: "L4",
-      poMappings: { PO1: 3, PO2: 3, PO3: 2, PO4: 2, PO12: 1 },
-      psoMappings: { PSO1: 3, PSO2: 2 }
+      bloom_level: 4
     },
     {
-      code: "CO2",
+      id: "CO2",
       statement: "Construct and implement singly linked, doubly linked, circular linked lists, stacks, and circular queues for dynamic memory management.",
-      bloomsLevel: "L3",
-      poMappings: { PO1: 3, PO2: 2, PO3: 3, PO5: 2 },
-      psoMappings: { PSO1: 3, PSO2: 3 }
+      bloom_level: 3
     },
     {
-      code: "CO3",
+      id: "CO3",
       statement: "Evaluate binary trees, binary search trees (BST), and AVL tree self-balancing rotations during dynamic data updates.",
-      bloomsLevel: "L5",
-      poMappings: { PO1: 3, PO2: 3, PO3: 3, PO4: 2 },
-      psoMappings: { PSO1: 3, PSO2: 2 }
+      bloom_level: 5
     },
     {
-      code: "CO4",
+      id: "CO4",
       statement: "Design graph models and compute shortest paths, topological sort orders, and minimum spanning trees using BFS, DFS, Dijkstra, and Kruskal algorithms.",
-      bloomsLevel: "L4",
-      poMappings: { PO1: 3, PO2: 3, PO3: 3, PO5: 2 },
-      psoMappings: { PSO1: 3, PSO2: 3 }
+      bloom_level: 4
     },
     {
-      code: "CO5",
+      id: "CO5",
       statement: "Implement collision resolution strategies in hash tables including separate chaining and open addressing with linear and quadratic probing.",
-      bloomsLevel: "L3",
-      poMappings: { PO1: 3, PO2: 2, PO3: 2, PO4: 2 },
-      psoMappings: { PSO1: 3, PSO2: 2 }
+      bloom_level: 3
     }
   ],
-  units: [
-    { unitRoman: "UNIT I", title: "Linear Data Structures & Algorithm Complexity", lectureHours: 12, bloomsTier: "L4", content: "Asymptotic notation, amortized analysis, Singly & Doubly Linked Lists, Array-based stacks and queues." },
-    { unitRoman: "UNIT II", title: "Tree Hierarchies & Balanced Search Structures", lectureHours: 12, bloomsTier: "L5", content: "Binary Trees, BST operations, AVL Trees, balancing rotations, B-Trees & Red-Black tree principles." },
-    { unitRoman: "UNIT III", title: "Graph Theory & Network Traversal", lectureHours: 12, bloomsTier: "L4", content: "Graph representations, BFS, DFS, topological sorting, Dijkstra shortest path, Kruskal and Prim MST." },
-    { unitRoman: "UNIT IV", title: "Hashing & Priority Queues", lectureHours: 12, bloomsTier: "L3", content: "Hash functions, collision resolution, binary heaps, priority queue operations, heap sort." },
-    { unitRoman: "UNIT V", title: "Sorting Paradigms & Advanced Applications", lectureHours: 12, bloomsTier: "L4", content: "Divide and conquer, QuickSort, MergeSort, RadixSort, Disjoint-Set Data Structures (Union-Find)." }
-  ],
-  governanceQuorum: {
-    hodSigned: true,
-    verificationTimestamp: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC',
-    digitalSignature: "ED25519-SIG-RATIFIED-9B4F81DA",
-    checksum: "0x9b4fa267"
+  co_po_pso_map: {
+    CO1: { PO1: 3, PO2: 3, PO3: 2, PO4: 2, PO12: 1, PSO1: 3, PSO2: 2 },
+    CO2: { PO1: 3, PO2: 2, PO3: 3, PO5: 2, PSO1: 3, PSO2: 3 },
+    CO3: { PO1: 3, PO2: 3, PO3: 3, PO4: 2, PSO1: 3, PSO2: 2 },
+    CO4: { PO1: 3, PO2: 3, PO3: 3, PO5: 2, PSO1: 3, PSO2: 3 },
+    CO5: { PO1: 3, PO2: 2, PO3: 2, PO4: 2, PSO1: 3, PSO2: 2 }
   },
-  verifiedBy: "SpecForge AI Synthesis Engine",
-  credit: "CREATED BY TANUSH M D",
-  timestamp: new Date().toISOString()
+  units: [
+    { number: 1, title: "Linear Data Structures & Algorithm Complexity" },
+    { number: 2, title: "Tree Hierarchies & Balanced Search Structures" },
+    { number: 3, title: "Graph Theory & Network Traversal" },
+    { number: 4, title: "Hashing & Priority Queues" },
+    { number: 5, title: "Sorting Paradigms & Advanced Applications" }
+  ],
+  assessment: {
+    cie: 50,
+    see: 50
+  },
+  defects: []
 };
 
 fs.writeFileSync(outputJsonPath, JSON.stringify(outputPayload, null, 2), 'utf8');
@@ -110,18 +105,19 @@ const outputHtmlPath = path.join(outputsDir, 'spec.html');
 const poHeaders = ['PO1', 'PO2', 'PO3', 'PO4', 'PO5', 'PO6', 'PO7', 'PO8', 'PO9', 'PO10', 'PO11', 'PO12'];
 const psoHeaders = ['PSO1', 'PSO2', 'PSO3'];
 
-const cloRows = outputPayload.clos.map(c => `
+const cloRows = outputPayload.course_outcomes.map(c => `
   <tr>
-    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">${c.code}</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">${c.id}</td>
     <td style="padding: 10px 14px; border: 1px solid #cbd5e1;">${c.statement}</td>
-    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; color: #4338ca;">${c.bloomsLevel}</td>
+    <td style="padding: 10px 14px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: bold; color: #4338ca;">L${c.bloom_level}</td>
   </tr>
 `).join('');
 
-const matrixRows = outputPayload.clos.map(c => {
-  const poTds = poHeaders.map(p => `<td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: ${(c.poMappings[p] || 0) > 0 ? 'bold' : 'normal'}; background: ${(c.poMappings[p] || 0) > 0 ? '#eef2ff' : 'transparent'};">${c.poMappings[p] || '-'}</td>`).join('');
-  const psoTds = psoHeaders.map(p => `<td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: ${(c.psoMappings[p] || 0) > 0 ? 'bold' : 'normal'}; background: ${(c.psoMappings[p] || 0) > 0 ? '#ecfdf5' : 'transparent'};">${c.psoMappings[p] || '-'}</td>`).join('');
-  return `<tr><td style="padding: 8px 10px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">${c.code}</td>${poTds}${psoTds}</tr>`;
+const matrixRows = outputPayload.course_outcomes.map(c => {
+  const map = outputPayload.co_po_pso_map[c.id] || {};
+  const poTds = poHeaders.map(p => `<td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: ${(map[p] || 0) > 0 ? 'bold' : 'normal'}; background: ${(map[p] || 0) > 0 ? '#eef2ff' : 'transparent'};">${map[p] || '-'}</td>`).join('');
+  const psoTds = psoHeaders.map(p => `<td style="padding: 8px 6px; border: 1px solid #cbd5e1; text-align: center; font-family: monospace; font-weight: ${(map[p] || 0) > 0 ? 'bold' : 'normal'}; background: ${(map[p] || 0) > 0 ? '#ecfdf5' : 'transparent'};">${map[p] || '-'}</td>`).join('');
+  return `<tr><td style="padding: 8px 10px; border: 1px solid #cbd5e1; font-weight: bold; font-family: monospace;">${c.id}</td>${poTds}${psoTds}</tr>`;
 }).join('');
 
 const fullHtml = `<!DOCTYPE html>
@@ -129,7 +125,7 @@ const fullHtml = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${outputPayload.courseCode} - Accredited Course Specification Dossier</title>
+  <title>${outputPayload.course.code} - Accredited Course Specification Dossier</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 40px 16px; background: #f8fafc; color: #0f172a; line-height: 1.5; }
@@ -152,30 +148,33 @@ const fullHtml = `<!DOCTYPE html>
 <body>
   <div class="container">
     <div class="header-banner">
-      <div class="inst-title">${outputPayload.institution}</div>
+      <div class="inst-title">AUTONOMOUS INSTITUTE OF TECHNOLOGY & ENGINEERING</div>
       <div class="inst-sub">Department of Computer Science & Engineering • B.Tech Curriculum</div>
       <div class="doc-type">OFFICIAL ACCREDITED COURSE SPECIFICATION (spec.html)</div>
     </div>
 
     <div class="grid-meta">
-      <div class="meta-item"><span class="meta-label">Course Code:</span><span class="meta-val">${outputPayload.courseCode}</span></div>
-      <div class="meta-item"><span class="meta-label">Regulation / Batch:</span><span class="meta-val">${outputPayload.regulation} (${outputPayload.academicYear})</span></div>
-      <div class="meta-item"><span class="meta-label">Course Title:</span><span class="meta-val">${outputPayload.courseTitle}</span></div>
+      <div class="meta-item"><span class="meta-label">Course Code:</span><span class="meta-val">${outputPayload.course.code}</span></div>
+      <div class="meta-item"><span class="meta-label">Course Type:</span><span class="meta-val">${outputPayload.course.course_type.toUpperCase()} (L-T-P: ${outputPayload.course.credits_ltp})</span></div>
+      <div class="meta-item"><span class="meta-label">Course Title:</span><span class="meta-val">${outputPayload.course.title}</span></div>
       <div class="meta-item"><span class="meta-label">Status:</span><span class="badge">APPROVED & RATIFIED</span></div>
-      <div class="meta-item"><span class="meta-label">Credits (L:T:P):</span><span class="meta-val">${outputPayload.credits.lecture}:${outputPayload.credits.tutorial}:${outputPayload.credits.practical} (Total: ${outputPayload.credits.total})</span></div>
-      <div class="meta-item"><span class="meta-label">Contact Hours:</span><span class="meta-val">${outputPayload.credits.contactHours} Hours</span></div>
+      <div class="meta-item"><span class="meta-label">Department:</span><span class="meta-val">${outputPayload.course.department}</span></div>
+      <div class="meta-item"><span class="meta-label">Teaching Hours:</span><span class="meta-val">Lecture: ${outputPayload.teaching_hours.lecture}h • Practical: ${outputPayload.teaching_hours.practical}h (Total: ${outputPayload.teaching_hours.total}h)</span></div>
     </div>
 
-    <div class="section-title">1. Course Objectives</div>
+    <div class="section-title">1. Course Summary & Objectives</div>
+    <p style="font-size: 13px; color: #334155; line-height: 1.6; margin-bottom: 12px;">${outputPayload.course.summary}</p>
     <ol style="font-size: 13px; color: #334155; line-height: 1.7; margin-left: 20px;">
-      ${outputPayload.courseObjectives.map(o => `<li>${o}</li>`).join('')}
+      <li>To introduce foundational concepts of abstract data types and algorithmic complexity.</li>
+      <li>To analyze linear and non-linear data structures including trees, balanced search structures, and graphs.</li>
+      <li>To design and evaluate efficient sorting, searching, and hashing strategies for computational tasks.</li>
     </ol>
 
     <div class="section-title">2. Course Learning Outcomes (CLOs) & Bloom Taxonomy</div>
     <table>
       <thead>
         <tr>
-          <th style="width: 12%;">CLO Code</th>
+          <th style="width: 12%;">CLO ID</th>
           <th style="width: 70%;">Outcome Statement</th>
           <th style="width: 18%;">Bloom Level</th>
         </tr>
@@ -206,18 +205,14 @@ const fullHtml = `<!DOCTYPE html>
       ${outputPayload.units.map(u => `
         <div style="margin-bottom: 16px; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <strong style="font-size: 14px; color: #0f172a;">${u.unitRoman}: ${u.title}</strong>
-            <span style="font-size: 11px; font-family: monospace; background: #e0e7ff; color: #3730a3; padding: 3px 10px; border-radius: 9999px; font-weight: 600;">
-              ${u.lectureHours} Hours • Tier: ${u.bloomsTier}
-            </span>
+            <strong style="font-size: 14px; color: #0f172a;">UNIT ${u.number}: ${u.title}</strong>
           </div>
-          <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.6;">${u.content}</p>
         </div>
       `).join('')}
     </div>
 
     <div class="footer">
-      <div>AUTHENTICATION SEAL: ${outputPayload.governanceQuorum.digitalSignature}</div>
+      <div>AUTHENTICATION SEAL: ED25519-SIG-RATIFIED-9B4F81DA</div>
       <div>CREATED BY TANUSH M D</div>
     </div>
   </div>

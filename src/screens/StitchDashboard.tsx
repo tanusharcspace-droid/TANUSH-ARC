@@ -65,17 +65,31 @@ export const StitchDashboard: React.FC<StitchDashboardProps> = ({
       reader.onload = (event) => {
         try {
           const parsed = JSON.parse(event.target?.result as string);
-          const updatedJsonSpec: CourseSpecification = {
-            ...spec,
-            input_id: parsed.input_id || spec.input_id || 'SAMPLE',
-            code: parsed.courseCode || parsed.code || spec.code || 'CS301',
-            title: parsed.courseTitle || parsed.title || spec.title || baseName,
-            regulation: parsed.regulation || spec.regulation || '2024 Autonomy',
-            academicYear: parsed.academicYear || spec.academicYear || '2025-2026',
-            status: parsed.status || spec.status || 'approved',
-            credits: parsed.credits ? { ...spec.credits, ...parsed.credits } : spec.credits,
-            courseObjectives: Array.isArray(parsed.courseObjectives) && parsed.courseObjectives.length > 0 ? parsed.courseObjectives : spec.courseObjectives,
-            clos: Array.isArray(parsed.clos) && parsed.clos.length > 0 ? parsed.clos.map((c: any, idx: number) => ({
+          const coPoMap = parsed.co_po_pso_map || {};
+          
+          let parsedClos = spec.clos;
+          if (Array.isArray(parsed.course_outcomes) && parsed.course_outcomes.length > 0) {
+            parsedClos = parsed.course_outcomes.map((c: any, idx: number) => {
+              const code = c.code || `CO${idx + 1}`;
+              const mappings = coPoMap[code] || {};
+              const poMappings: Record<string, number> = {};
+              const psoMappings: Record<string, number> = {};
+              Object.entries(mappings).forEach(([k, v]) => {
+                if (k.startsWith('PSO')) psoMappings[k] = Number(v);
+                else poMappings[k] = Number(v);
+              });
+              return {
+                id: `clo-${Date.now()}-${idx}`,
+                code,
+                statement: c.statement || '',
+                bloomsLevel: c.bloom_level || c.bloomsLevel || 'L3',
+                poMappings,
+                psoMappings,
+                assessmentMethods: ['Continuous Evaluation', 'End-Term Examination']
+              };
+            });
+          } else if (Array.isArray(parsed.clos) && parsed.clos.length > 0) {
+            parsedClos = parsed.clos.map((c: any, idx: number) => ({
               id: c.id || `clo-${Date.now()}-${idx}`,
               code: c.code || `CO${idx + 1}`,
               statement: c.statement || '',
@@ -83,16 +97,41 @@ export const StitchDashboard: React.FC<StitchDashboardProps> = ({
               poMappings: c.poMappings || {},
               psoMappings: c.psoMappings || {},
               assessmentMethods: c.assessmentMethods || ['Continuous Evaluation', 'End-Term Examination']
-            })) : spec.clos,
-            units: Array.isArray(parsed.units) && parsed.units.length > 0 ? parsed.units.map((u: any, idx: number) => ({
-              id: u.id || `unit-${Date.now()}-${idx}`,
-              unitNumber: u.unitNumber || (idx + 1),
-              unitRoman: u.unitRoman || `UNIT ${['I', 'II', 'III', 'IV', 'V', 'VI'][idx] || (idx + 1)}`,
-              title: u.title || `Unit ${idx + 1}`,
-              lectureHours: u.lectureHours || 12,
-              bloomsTier: u.bloomsTier || 'L3',
-              content: u.content || ''
-            })) : spec.units,
+            }));
+          }
+
+          let parsedUnits = spec.units;
+          if (Array.isArray(parsed.units) && parsed.units.length > 0) {
+            const romanList = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
+            parsedUnits = parsed.units.map((u: any, idx: number) => {
+              const num = u.number || u.unitNumber || (idx + 1);
+              return {
+                id: u.id || `unit-${Date.now()}-${idx}`,
+                unitNumber: num,
+                unitRoman: u.unitRoman || `UNIT ${romanList[num - 1] || num}`,
+                title: u.title || `Unit ${num}`,
+                lectureHours: u.lectureHours || 12,
+                bloomsTier: u.bloomsTier || 'L3',
+                content: u.content || `Unit ${num} core concepts and syllabus objectives.`
+              };
+            });
+          }
+
+          const updatedJsonSpec: CourseSpecification = {
+            ...spec,
+            input_id: parsed.input_id || spec.input_id || 'SAMPLE',
+            code: parsed.course?.code || parsed.courseCode || parsed.code || spec.code || 'CS301',
+            title: parsed.course?.title || parsed.courseTitle || parsed.title || spec.title || baseName,
+            regulation: parsed.course?.regulation || parsed.regulation || spec.regulation || '2024 Autonomy',
+            academicYear: parsed.course?.academic_year || parsed.academicYear || spec.academicYear || '2025-2026',
+            department: parsed.course?.department || spec.department || 'Computer Science & Engineering',
+            program: parsed.course?.program || spec.program || 'B.Tech',
+            semester: String(parsed.course?.semester || spec.semester || '3'),
+            status: parsed.status || spec.status || 'approved',
+            credits: parsed.credits ? { ...spec.credits, ...parsed.credits } : spec.credits,
+            courseObjectives: Array.isArray(parsed.courseObjectives) && parsed.courseObjectives.length > 0 ? parsed.courseObjectives : spec.courseObjectives,
+            clos: parsedClos,
+            units: parsedUnits,
             synthesisFiles: {
               ...spec.synthesisFiles,
               specDoc: {
@@ -442,87 +481,120 @@ ${divider}`;
   };
 
   const getExportPayload = () => {
+    // 1. Course Outcomes formatted cleanly with 'id' and integer 'bloom_level'
+    const courseOutcomes = (spec.clos && spec.clos.length > 0 ? spec.clos : [
+      {
+        id: "CO1",
+        statement: "Analyze the asymptotic time and space complexity of iterative and recursive algorithms using Big-O, Big-Omega, and Big-Theta notations.",
+        bloom_level: 4,
+        poMappings: { PO1: 3, PO2: 3, PO3: 2, PO4: 2, PO12: 1 },
+        psoMappings: { PSO1: 3, PSO2: 2 }
+      },
+      {
+        id: "CO2",
+        statement: "Construct and implement singly linked, doubly linked, circular linked lists, stacks, and circular queues for dynamic memory management.",
+        bloom_level: 3,
+        poMappings: { PO1: 3, PO2: 2, PO3: 3, PO5: 2 },
+        psoMappings: { PSO1: 3, PSO2: 3 }
+      },
+      {
+        id: "CO3",
+        statement: "Evaluate binary trees, binary search trees (BST), and AVL tree self-balancing rotations during dynamic data updates.",
+        bloom_level: 5,
+        poMappings: { PO1: 3, PO2: 3, PO3: 3, PO4: 2 },
+        psoMappings: { PSO1: 3, PSO2: 2 }
+      },
+      {
+        id: "CO4",
+        statement: "Design graph models and compute shortest paths, topological sort orders, and minimum spanning trees using BFS, DFS, Dijkstra, and Kruskal algorithms.",
+        bloom_level: 4,
+        poMappings: { PO1: 3, PO2: 3, PO3: 3, PO5: 2 },
+        psoMappings: { PSO1: 3, PSO2: 3 }
+      },
+      {
+        id: "CO5",
+        statement: "Implement collision resolution strategies in hash tables including separate chaining and open addressing with linear and quadratic probing.",
+        bloom_level: 3,
+        poMappings: { PO1: 3, PO2: 2, PO3: 2, PO4: 2 },
+        psoMappings: { PSO1: 3, PSO2: 2 }
+      }
+    ]).map((c: any, idx: number) => {
+      const parsedLevel = typeof c.bloom_level === 'number'
+        ? c.bloom_level
+        : parseInt(String(c.bloomsLevel || c.bloom_level || '3').replace(/\D/g, ''), 10) || 3;
+      return {
+        id: c.id || c.code || `CO${idx + 1}`,
+        statement: c.statement,
+        bloom_level: parsedLevel
+      };
+    });
+
+    // 2. Co-PO-PSO map
+    const coPoPsoMap: Record<string, Record<string, number>> = {};
+    const sourceClos = (spec.clos && spec.clos.length > 0 ? spec.clos : [
+      { id: "CO1", code: "CO1", poMappings: { PO1: 3, PO2: 3, PO3: 2, PO4: 2, PO12: 1 }, psoMappings: { PSO1: 3, PSO2: 2 } },
+      { id: "CO2", code: "CO2", poMappings: { PO1: 3, PO2: 2, PO3: 3, PO5: 2 }, psoMappings: { PSO1: 3, PSO2: 3 } },
+      { id: "CO3", code: "CO3", poMappings: { PO1: 3, PO2: 3, PO3: 3, PO4: 2 }, psoMappings: { PSO1: 3, PSO2: 2 } },
+      { id: "CO4", code: "CO4", poMappings: { PO1: 3, PO2: 3, PO3: 3, PO5: 2 }, psoMappings: { PSO1: 3, PSO2: 3 } },
+      { id: "CO5", code: "CO5", poMappings: { PO1: 3, PO2: 2, PO3: 2, PO4: 2 }, psoMappings: { PSO1: 3, PSO2: 2 } }
+    ]);
+    sourceClos.forEach((clo) => {
+      const cloKey = clo.code || clo.id;
+      const merged: Record<string, number> = {};
+      if (clo.poMappings) {
+        Object.entries(clo.poMappings).forEach(([k, v]) => {
+          if (v > 0) merged[k] = v;
+        });
+      }
+      if (clo.psoMappings) {
+        Object.entries(clo.psoMappings).forEach(([k, v]) => {
+          if (v > 0) merged[k] = v;
+        });
+      }
+      coPoPsoMap[cloKey] = merged;
+    });
+
+    // 3. Units: number and title ONLY per schema
+    const defaultUnits = [
+      { number: 1, title: "Linear Data Structures & Algorithm Complexity" },
+      { number: 2, title: "Tree Hierarchies & Balanced Search Structures" },
+      { number: 3, title: "Graph Theory & Network Traversal" },
+      { number: 4, title: "Hashing & Priority Queues" },
+      { number: 5, title: "Sorting Paradigms & Advanced Applications" }
+    ];
+    const units = spec.units && spec.units.length > 0
+      ? spec.units.map((u, idx) => ({
+          number: u.unitNumber || (idx + 1),
+          title: u.title.replace(/^UNIT\s+[IVXLCDM]+\s*:\s*/i, '').trim() || `Unit ${idx + 1}`
+        }))
+      : defaultUnits;
+
     return {
       input_id: spec.input_id || "SAMPLE",
-      courseCode: spec.code || "CS301",
-      code: spec.code || "CS301",
-      courseTitle: spec.title || "Data Structures & Algorithms",
-      title: spec.title || "Data Structures & Algorithms",
-      institution: "Autonomous Institute of Technology & Engineering",
-      regulation: spec.regulation || "2024 Autonomy",
-      academicYear: spec.academicYear || "2025-2026",
-      status: spec.status || "approved",
-      credits: spec.credits?.lecture !== undefined ? spec.credits : { lecture: 3, tutorial: 0, practical: 2, total: 4, contactHours: 60 },
-      courseObjectives: spec.courseObjectives && spec.courseObjectives.length > 0 ? spec.courseObjectives : [
-        "To introduce foundational concepts of abstract data types and algorithmic complexity.",
-        "To analyze linear and non-linear data structures including trees, balanced search structures, and graphs.",
-        "To design and evaluate efficient sorting, searching, and hashing strategies for computational tasks."
-      ],
-      clos: spec.clos && spec.clos.length > 0 ? spec.clos.map(c => ({
-        code: c.code,
-        statement: c.statement,
-        bloomsLevel: c.bloomsLevel,
-        poMappings: c.poMappings,
-        psoMappings: c.psoMappings
-      })) : [
-        {
-          code: "CO1",
-          statement: "Analyze the asymptotic time and space complexity of iterative and recursive algorithms using Big-O, Big-Omega, and Big-Theta notations.",
-          bloomsLevel: "L4",
-          poMappings: { PO1: 3, PO2: 3, PO3: 2, PO4: 2, PO12: 1 },
-          psoMappings: { PSO1: 3, PSO2: 2 }
-        },
-        {
-          code: "CO2",
-          statement: "Construct and implement singly linked, doubly linked, circular linked lists, stacks, and circular queues for dynamic memory management.",
-          bloomsLevel: "L3",
-          poMappings: { PO1: 3, PO2: 2, PO3: 3, PO5: 2 },
-          psoMappings: { PSO1: 3, PSO2: 3 }
-        },
-        {
-          code: "CO3",
-          statement: "Evaluate binary trees, binary search trees (BST), and AVL tree self-balancing rotations during dynamic data updates.",
-          bloomsLevel: "L5",
-          poMappings: { PO1: 3, PO2: 3, PO3: 3, PO4: 2 },
-          psoMappings: { PSO1: 3, PSO2: 2 }
-        },
-        {
-          code: "CO4",
-          statement: "Design graph models and compute shortest paths, topological sort orders, and minimum spanning trees using BFS, DFS, Dijkstra, and Kruskal algorithms.",
-          bloomsLevel: "L4",
-          poMappings: { PO1: 3, PO2: 3, PO3: 3, PO5: 2 },
-          psoMappings: { PSO1: 3, PSO2: 3 }
-        },
-        {
-          code: "CO5",
-          statement: "Implement collision resolution strategies in hash tables including separate chaining and open addressing with linear and quadratic probing.",
-          bloomsLevel: "L3",
-          poMappings: { PO1: 3, PO2: 2, PO3: 2, PO4: 2 },
-          psoMappings: { PSO1: 3, PSO2: 2 }
-        }
-      ],
-      units: spec.units && spec.units.length > 0 ? spec.units.map(u => ({
-        unitRoman: u.unitRoman,
-        title: u.title,
-        lectureHours: u.lectureHours,
-        bloomsTier: u.bloomsTier,
-        content: u.content
-      })) : [
-        { unitRoman: "UNIT I", title: "Linear Data Structures & Algorithm Complexity", lectureHours: 12, bloomsTier: "L4", content: "Asymptotic notation, amortized analysis, Singly & Doubly Linked Lists, Array-based stacks and queues." },
-        { unitRoman: "UNIT II", title: "Tree Hierarchies & Balanced Search Structures", lectureHours: 12, bloomsTier: "L5", content: "Binary Trees, BST operations, AVL Trees, balancing rotations, B-Trees & Red-Black tree principles." },
-        { unitRoman: "UNIT III", title: "Graph Theory & Network Traversal", lectureHours: 12, bloomsTier: "L4", content: "Graph representations, BFS, DFS, topological sorting, Dijkstra shortest path, Kruskal and Prim MST." },
-        { unitRoman: "UNIT IV", title: "Hashing & Priority Queues", lectureHours: 12, bloomsTier: "L3", content: "Hash functions, collision resolution, binary heaps, priority queue operations, heap sort." },
-        { unitRoman: "UNIT V", title: "Sorting Paradigms & Advanced Applications", lectureHours: 12, bloomsTier: "L4", content: "Divide and conquer, QuickSort, MergeSort, RadixSort, Disjoint-Set Data Structures (Union-Find)." }
-      ],
-      governanceQuorum: {
-        hodSigned: true,
-        verificationTimestamp: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC',
-        digitalSignature: spec.governanceQuorum?.digitalSignature || "ED25519-SIG-RATIFIED-9B4F81DA",
-        checksum: spec.governanceQuorum?.checksum || "0x9b4fa267"
+      schema_version: "1.0",
+      template: "integrated",
+      course: {
+        code: spec.code || "CS301",
+        title: spec.title || "Data Structures & Algorithms",
+        department: spec.department || "Computer Science & Engineering",
+        course_type: "integrated",
+        credits_ltp: "3-0-2",
+        summary: spec.courseOverview || "Comprehensive study of foundational abstract data types, algorithm complexity analysis, dynamic memory structures, trees, graphs, and hashing paradigms."
       },
-      verifiedBy: "SpecForge AI Synthesis Engine",
-      credit: "CREATED BY TANUSH M D",
-      timestamp: new Date().toISOString()
+      teaching_hours: {
+        lecture: spec.credits?.lecture ? spec.credits.lecture * 15 : 45,
+        tutorial: spec.credits?.tutorial ? spec.credits.tutorial * 15 : 0,
+        practical: spec.credits?.practical ? spec.credits.practical * 15 : 15,
+        total: spec.credits?.contactHours || 60
+      },
+      course_outcomes: courseOutcomes,
+      co_po_pso_map: coPoPsoMap,
+      units: units,
+      assessment: {
+        cie: 50,
+        see: 50
+      },
+      defects: []
     };
   };
 
